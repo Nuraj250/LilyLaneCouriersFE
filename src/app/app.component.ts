@@ -10,6 +10,7 @@ import { UserService } from './common/service/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  implements OnInit, OnDestroy{
+  [x: string]: any;
   public headerTitle?: string;
   currentUser?: User;
   private routerDataSubscription?: Subscription;
@@ -22,39 +23,39 @@ export class AppComponent  implements OnInit, OnDestroy{
   ) {}
 
   ngOnInit() {
-    this.userService.currentUser.subscribe((user: User ) => {
-      this.currentUser = user;
-      this.changeDetectorRef.detectChanges();
+    // this.userService.currentUser.subscribe((user: User ) => {
+    //   this.currentUser = user;
+    //   this.changeDetectorRef.detectChanges();
 
-      if (!this.userService.currentUserValue){
-        this.router.navigate(['/login']);
-      }
-    });
-    this.initiateTitleUpdating();
+    //   if (!this.userService.currentUserValue){
+    //     this.router.navigate(['/landing']);
+    //   }
+    // });
+    // this.initiateTitleUpdating();
   }
 
-  private initiateTitleUpdating() {
-    this.routerDataSubscription = this.router
-      .events.pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => {
-          let child = this.activatedRoute.firstChild;
-          while (child?.firstChild) {
-            child = child.firstChild;
-          }
-          if (child?.snapshot.data['title']) {
-            return child.snapshot.data['title'];
-          }
-          // provide a default value if required
-        })
-      ).subscribe((title: string) => {
-        this.headerTitle = title;
-      });
-  }
+  // private initiateTitleUpdating() {
+  //   this.routerDataSubscription = this.router
+  //     .events.pipe(
+  //       filter(event => event instanceof NavigationEnd),
+  //       map(() => {
+  //         let child = this.activatedRoute.firstChild;
+  //         while (child?.firstChild) {
+  //           child = child.firstChild;
+  //         }
+  //         if (child?.snapshot.data['title']) {
+  //           return child.snapshot.data['title'];
+  //         }
+  //         // provide a default value if required
+  //       })
+  //     ).subscribe((title: string) => {
+  //       this.headerTitle = title;
+  //     });
+  // }
 
   ngOnDestroy() {
-    if (this.routerDataSubscription) {
-      this.routerDataSubscription.unsubscribe();
-    }
+    // if (this.routerDataSubscription) {
+    //   this.routerDataSubscription.unsubscribe();
+    // }
   }
 }

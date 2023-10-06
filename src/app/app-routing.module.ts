@@ -3,22 +3,28 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { authGuard } from './common/helpers/auth.guard';
+import { LandingComponent } from './component/landing/landing.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
+    component: LandingComponent,
+    data: { title: 'DASHBOARD' }
+  },
+  {
+    path: 'dashboard',
     component: DashboardComponent,
     canActivate: [authGuard],
-    data: {title: 'DASHBOARD'}
+    data: { title: 'DASHBOARD' }
   },
   {
     path: 'login',
     component: SignInComponent,
-    data: {register: true, title: 'LOGIN'}
+    data: { title: 'LOGIN' }
   },
 
   // otherwise redirect to home.
-  {path: '**', redirectTo: ''}
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
