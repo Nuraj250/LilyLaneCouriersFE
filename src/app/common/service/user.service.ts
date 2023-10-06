@@ -6,9 +6,9 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class UserService {
-constructor(
-  private _currentUserSubject: BehaviorSubject<User>,
-  public currentUser: Observable<User>){}
+
+  private _currentUserSubject:any= BehaviorSubject<User>;
+  public currentUser:any= Observable<User>
 
   public loadUserData(): Promise<void> {
     return new Promise<void>((resolve, reject): void => {
@@ -23,7 +23,7 @@ constructor(
     return this._currentUserSubject!.value;
   }
 
-  public get currentUserSubject(): BehaviorSubject<any> {
+  public get currentUserSubject(): BehaviorSubject<User> {
     return this._currentUserSubject;
   }
 

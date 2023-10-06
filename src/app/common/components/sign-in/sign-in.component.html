@@ -1,58 +1,32 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1rem" fxLayoutAlign="center" class="login-container">
 
-<div
-  fxLayout="row"
-  fxLayout.xs="column"
-  fxLayoutGap="1rem"
-  fxLayoutAlign="center"
-  class="login-container"
->
+    <div fxFlex="50" class="login-image">
+        <img
+            src="https://images.pexels.com/photos/17987435/pexels-photo-17987435/free-photo-of-vicuna-en-la-puna.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+    </div>
 
-  <div fxFlex="50" class="login-image">
-    <img src="https://images.pexels.com/photos/17987435/pexels-photo-17987435/free-photo-of-vicuna-en-la-puna.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
-  </div>
-
-  <div fxFlex="50" class="login-form full-width"
-       fxLayout="column"
-       fxLayout.xs="column"
-       fxLayoutAlign="center">
+    <div fxFlex="50" class="login-form full-width" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center">
 
         <div class="login-form-container" fxFlexAlign="auto">
-          <h1 class="mat-h1">Sign in to your account</h1>
+            <h1 class="mat-h1">Sign in to your account</h1>
 
-          <form [formGroup]="form" class="form">
-            <mat-form-field class="full-width" appearance="outline">
-              <mat-label>User name</mat-label>
-              <input
-                matInput
-                placeholder="Enter username"
-                formControlName="username"
-              />
-            </mat-form-field>
-            <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Password</mat-label>
-              <input
-                matInput
-                type="password"
-                placeholder="Enter password"
-                formControlName="password"
-                (keydown)="onKeydown($event)"
-
-              />
-            </mat-form-field>
-            <button
-              mat-raised-button
-              color="primary"
-              type="button"
-              class="submit-button"
-              [disabled]="form.invalid || form.pristine"
-              (click)="checkLogin()"
-            >
-              LOG IN
-            </button>
-          </form>
+            <form [formGroup]="form" class="form">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>User name</mat-label>
+                    <input matInput placeholder="Enter username" formControlName="username" />
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Enter password" formControlName="password"
+                        (keydown)="onKeydown($event)" />
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="button" class="submit-button"
+                    [disabled]="form.invalid || form.pristine" (click)="checkLogin()">
+                    LOG IN
+                </button>
+            </form>
         </div>
 
 
-  </div>
+    </div>
 </div>
-

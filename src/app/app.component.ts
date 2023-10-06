@@ -22,7 +22,7 @@ export class AppComponent  implements OnInit, OnDestroy{
   ) {}
 
   ngOnInit() {
-    this.userService.currentUser.subscribe(user => {
+    this.userService.currentUser.subscribe((user: User ) => {
       this.currentUser = user;
       this.changeDetectorRef.detectChanges();
 

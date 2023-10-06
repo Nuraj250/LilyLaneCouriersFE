@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingComponent } from './common/components/landing/landing.component';
 import { SignInComponent } from './common/components/sign-in/sign-in.component';
 import { DashboardComponent } from './common/components/dashboard/dashboard.component';
@@ -12,11 +13,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexModule } from '@angular/flex-layout';
 import { JwtInterceptor, ErrorInterceptor } from './common/helpers';
 import { UserService } from './common/service/user.service';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatInputModule } from '@angular/material/input';
 
 export function initializeApp(userService: UserService): any {
   return (): Promise<void> => userService.loadUserData();
@@ -32,6 +34,7 @@ export function initializeApp(userService: UserService): any {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -39,7 +42,9 @@ export function initializeApp(userService: UserService): any {
     MatFormFieldModule,
     MatDividerModule,
     MatIconModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSnackBarModule,
+    MatInputModule
 
   ],
   providers: [
