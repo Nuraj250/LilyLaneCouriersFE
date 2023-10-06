@@ -23,7 +23,7 @@ constructor(
     return this._currentUserSubject!.value;
   }
 
-  public get currentUserSubject(): BehaviorSubject<User> {
+  public get currentUserSubject(): BehaviorSubject<any> {
     return this._currentUserSubject;
   }
 

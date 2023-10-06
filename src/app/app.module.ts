@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +7,20 @@ import { LandingComponent } from './common/components/landing/landing.component'
 import { SignInComponent } from './common/components/sign-in/sign-in.component';
 import { DashboardComponent } from './common/components/dashboard/dashboard.component';
 import { SignupComponent } from './common/components/signup/signup.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexModule } from '@angular/flex-layout';
+import { JwtInterceptor, ErrorInterceptor } from './common/helpers';
+import { UserService } from './common/service/user.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDividerModule} from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
+
+export function initializeApp(userService: UserService): any {
+  return (): Promise<void> => userService.loadUserData();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,9 +31,26 @@ import { SignupComponent } from './common/components/signup/signup.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FlexModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatIconModule,
+    MatSidenavModule
+
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [UserService], multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
