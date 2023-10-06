@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './common/components/dashboard/dashboard.component';
-import { SignInComponent } from './common/components/sign-in/sign-in.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { SignInComponent } from './component/sign-in/sign-in.component';
 import { authGuard } from './common/helpers/auth.guard';
 
 const routes: Routes = [

@@ -4,10 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LandingComponent } from './common/components/landing/landing.component';
-import { SignInComponent } from './common/components/sign-in/sign-in.component';
-import { DashboardComponent } from './common/components/dashboard/dashboard.component';
-import { SignupComponent } from './common/components/signup/signup.component';
+import { LandingComponent } from './component/landing/landing.component';
+import { SignInComponent } from './component/sign-in/sign-in.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexModule } from '@angular/flex-layout';
@@ -29,7 +28,6 @@ export function initializeApp(userService: UserService): any {
     LandingComponent,
     SignInComponent,
     DashboardComponent,
-    SignupComponent
   ],
   imports: [
     BrowserModule,
