@@ -95,7 +95,6 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80) no-repeat center;
     box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
 }
 
@@ -104,7 +103,7 @@ body {
     height: 100%;
     position: absolute;
     padding: 90px 70px 50px 70px;
-    background: rgba(0, 77, 77, .9);
+    background: rgb(51 48 31 / 90%);
 }
 
 .login-snip .login,
@@ -279,10 +278,12 @@ a {
 }
 
 .card {
-    width: 500px;
-    margin: auto;
+    width: 100%;
+    // margin: auto;
     position: relative;
-    top: 100px;
+    overflow: hidden;
+    height: 89vh;
+    // top: 100px;
 }
 
 ::placeholder {

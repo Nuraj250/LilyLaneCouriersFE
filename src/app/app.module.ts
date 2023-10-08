@@ -18,6 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ValidationMessageComponent } from './common/util/validation-message/validation-message.component';
 
 export function initializeApp(userService: UserService): any {
   return (): Promise<void> => userService.loadUserData();
@@ -28,6 +30,7 @@ export function initializeApp(userService: UserService): any {
     LandingComponent,
     SignInComponent,
     DashboardComponent,
+    ValidationMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,9 @@ export function initializeApp(userService: UserService): any {
     MatIconModule,
     MatSidenavModule,
     MatSnackBarModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
+
 
   ],
   providers: [

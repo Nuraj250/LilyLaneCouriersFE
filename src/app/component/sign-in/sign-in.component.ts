@@ -1,25 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
 import { AuthenticationService } from '../../common/service/authentication.service';
 import { MessageService } from '../../common/util/message';
+import { MatDialogRef } from '@angular/material/dialog';
+import {
+  getAbstractController
+} from 'src/app/common/util/funtions'
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent implements OnInit{
+export class SignInComponent implements OnInit {
 
   public form!: FormGroup;
   invalidLogin = false;
+  userForm:FormGroup = new FormGroup({});
+
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
     protected formBuilder: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public dialogRef: MatDialogRef<SignInComponent>
   ) {
   }
 
@@ -28,6 +35,14 @@ export class SignInComponent implements OnInit{
     if (localStorage.getItem('user')) {
       this.authenticationService.logout();
     }
+    this.userForm = new FormGroup({
+      id: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      contact: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+
+    });
   }
 
   populateForm()
@@ -46,7 +61,7 @@ export class SignInComponent implements OnInit{
     this.authenticationService.basicLogin(this.form!.value).pipe(first()).subscribe({
       next: data => {
         this.authenticationService.setUser(data);
-        this.router.navigateByUrl('', {replaceUrl: true, state: {isLogin: true}});
+        this.router.navigateByUrl('', { replaceUrl: true, state: { isLogin: true } });
         this.invalidLogin = false;
         this.messageService.success('LOGIN_SUCCESSFUL', '');
       },
@@ -72,6 +87,15 @@ export class SignInComponent implements OnInit{
         this.messageService.error('LOGIN_FAILED', 'LOGIN_INCOMPLETE');
       }
     }
+  }
+
+  /**
+ * for validation component
+ * @param fg
+ * @param fc
+ */
+  public getAbstractController(fg: FormGroup, fc: string) {
+    return getAbstractController(fg, fc);
   }
 }
 
