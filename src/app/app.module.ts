@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ValidationMessageComponent } from './common/util/validation-message/validation-message.component';
+import { MatButtonModule } from '@angular/material/button';
 
 export function initializeApp(userService: UserService): any {
   return (): Promise<void> => userService.loadUserData();
@@ -46,7 +47,8 @@ export function initializeApp(userService: UserService): any {
     MatSidenavModule,
     MatSnackBarModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
 
 
   ],

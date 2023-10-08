@@ -118,6 +118,11 @@ body {
     transition: all .4s linear;
 }
 
+.error-msg {
+    position: relative;
+    top: -1.5em;
+    color: red;
+  }
 .login-snip .sign-in,
 .login-snip .sign-up,
 .login-space .group .check {

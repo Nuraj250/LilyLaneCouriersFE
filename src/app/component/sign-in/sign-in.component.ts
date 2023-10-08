@@ -8,6 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import {
   getAbstractController
 } from 'src/app/common/util/funtions'
+import { UserService } from 'src/app/common/service/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,9 +17,10 @@ import {
 })
 export class SignInComponent implements OnInit {
 
-  public form!: FormGroup;
+  loginform: FormGroup = new FormGroup({});
+
   invalidLogin = false;
-  userForm:FormGroup = new FormGroup({});
+  userForm: FormGroup = new FormGroup({});
 
 
   constructor(
@@ -26,7 +28,8 @@ export class SignInComponent implements OnInit {
     private router: Router,
     protected formBuilder: FormBuilder,
     private messageService: MessageService,
-    public dialogRef: MatDialogRef<SignInComponent>
+    public dialogRef: MatDialogRef<SignInComponent>,
+    public userService: UserService
   ) {
   }
 
@@ -48,7 +51,7 @@ export class SignInComponent implements OnInit {
   populateForm()
     :
     void {
-    this.form = this.formBuilder.group({
+    this.loginform = this.formBuilder.group({
       username: [null, Validators.required],
       password: [null, Validators.required],
     });
@@ -58,10 +61,10 @@ export class SignInComponent implements OnInit {
    * Check login
    */
   checkLogin() {
-    this.authenticationService.basicLogin(this.form!.value).pipe(first()).subscribe({
+    this.authenticationService.basicLogin(this.loginform.value).pipe(first()).subscribe({
       next: data => {
         this.authenticationService.setUser(data);
-        this.router.navigateByUrl('', { replaceUrl: true, state: { isLogin: true } });
+        this.router.navigateByUrl('/dashboard', { replaceUrl: true, state: { isLogin: true } });
         this.invalidLogin = false;
         this.messageService.success('LOGIN_SUCCESSFUL', '');
       },
@@ -75,13 +78,26 @@ export class SignInComponent implements OnInit {
   }
 
   /**
+   * used to create user
+   */
+  userCreate() {
+    this.userService.createUser(this.userForm.value).subscribe((res: any) => {
+      this.router.navigateByUrl('/home', { replaceUrl: true, state: { isLogin: true } });
+      this.messageService.success('User Create SuccsessFUlly', '');
+    }, (error: any) => {
+      console.log(error);
+      this.messageService.error('somthing went wrong!User Create Failed . ', error);
+    })
+  }
+
+  /**
    * When press ENTER key trigger login
    *
    * @param event Get pressed key from password field
    */
   onKeydown(event: { key: string; }) {
     if (event.key === 'Enter') {
-      if (this.form.valid) {
+      if (this.loginform.valid) {
         this.checkLogin();
       } else {
         this.messageService.error('LOGIN_FAILED', 'LOGIN_INCOMPLETE');
